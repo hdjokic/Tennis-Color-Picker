@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Womens Tennis Clothes Picker</title>
+</head>
+<body>
+
+<h1>Womens Tennis Clothes Picker</h1>
+<p>Randomly pick the clothes for the week</p>
+
+
+<style type="text/css">
+    table          {border:ridge 5px black;}
+    table td       {border:inset 1px #000;}
+    table tr#ROW1  {background-color:white; color:black;}
+    table tr#ROW2  {background-color:white;}
+    table tr#ROW3  {background-color:white; color:black;}
+    table td#CELL9 {border:inset 4px black; background-color:white;}
+</style>
+
+<script src="RandomClothes.js"></script>
+
+<table>
+    <tr id="ROW1">
+        <td>Weekday</td>
+        <td>Up</td>
+        <td>Down</td>
+    </tr>
+
+
+    <tr id="ROW2">
+        <td>Monday</td>
+        <td id="2.2" ></td>
+        <td></td>
+        <td><input type="button" class="button" value="Add color" onclick="recolorCell()" /></td>
+    </tr>
+
+</table>
+
+</body>
+</html>
