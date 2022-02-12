@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:Margin="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Womens Tennis Clothes Picker</title>
@@ -10,11 +10,19 @@
 <p>Randomly pick the clothes for the week</p>
 
 <form>
-    <input type="button" class="button" value="Add color" onclick="recolorCell()" />
+    <input type="button" id = "btn" class="button" Margin: 0 auto value="Generate colors" onclick="recolorCell()" />
 
 </form>
 
+
 <style type="text/css">
+    table {
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 20px;
+        height: 100%;
+        table-layout: fixed;
+    }
 
     table          {border:ridge 5px black;}
     table td       {border:inset 1px #000;}
@@ -22,12 +30,16 @@
     table tr#ROW2  {background-color:white;}
     table tr#ROW3  {background-color:white; color:black;}
     table td#CELL9 {border:inset 10px black; background-color:white;}
+
+    #btn {
+        font-size: 28px;
+    }
+    
 </style>
 
+    <script src="RandomClothes.js"></script>
 
-<script src="RandomClothes.js"></script>
-
-<table>
+<table style="width:400px; border: 1px solid black">
     <tr id="ROW1">
         <td>Weekday</td>
         <td>Shirts</td>
