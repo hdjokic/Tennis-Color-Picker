@@ -8,10 +8,11 @@ let rerun = true;
 let prevColors = ["",""];
 let tempColor="";
 
-function generateColor(dontInclude) {
+function generateColor(dontInclude, dontInclude2) {
     let availableColors = ["red", "blue", "black", "white"];
 
     availableColors = availableColors.filter(color => color !== dontInclude);
+    availableColors = availableColors.filter(color => color !== dontInclude2);
     let color = availableColors[Math.floor(Math.random() * availableColors.length)];
 
     return color;
@@ -25,11 +26,13 @@ function recolorCell() {
             prevColors = currColors.slice();
             rerun=false;
 
-
             for (let j = 1; j < table.rows[i].cells.length; j++) {
 
                 if (table.rows[i].cells[1].style.backgroundColor === "red") {
-                    tempColor = generateColor("red");
+                    tempColor = generateColor("red", "blue");
+                }
+                else if (table.rows[i].cells[1].style.backgroundColor === "blue"){
+                    tempColor = generateColor("red")
                 } else {
                     tempColor = generateColor();
                 }
