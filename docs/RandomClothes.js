@@ -1,13 +1,4 @@
-let dontRepeatDays = true;
-let dontDoubleRed = true;
-let isRed = false;
-let prevRowColorCellOne = null;
-let prevRowColorCellTwo = null;
-let currColors = ["",""];
-let rerun = true;
-let prevColors = ["",""];
-let tempColor="";
-
+//let combos = []
 function generateColor(dontInclude, dontInclude2) {
     let availableColors = ["red", "blue", "black", "white"];
 
@@ -18,37 +9,51 @@ function generateColor(dontInclude, dontInclude2) {
     return color;
 }
 
-function recolorCell() {
-    const table = document.querySelector("table");
-    for (let i = 1; i < table.rows.length; i++) {
-        while((JSON.stringify(currColors) === JSON.stringify(prevColors)) || rerun){
-            console.log(JSON.stringify(currColors) === JSON.stringify(prevColors));
-            prevColors = currColors.slice();
-            rerun=false;
+function checkIfUnique(colorCombo, myCombos){
+    for (let i = 0; i < myCombos.length; i++) {
+        if (myCombos[i][0] === colorCombo[0] && myCombos[i][1] === colorCombo[1]){
+            return false;
+        }
+    }
+    return true;
+}
 
-            for (let j = 1; j < table.rows[i].cells.length; j++) {
+function generateColors() {
+    let combos = [];
+    for (let i = 0; i < 7; i++){
+        let colorCombo = [];
+        do{
+            let firstColor = generateColor();
+            let secondColor;
 
-                if (table.rows[i].cells[1].style.backgroundColor === "red") {
-                    tempColor = generateColor("red", "blue");
-                }
-                else if (table.rows[i].cells[1].style.backgroundColor === "blue"){
-                    tempColor = generateColor("red")
-                } else {
-                    tempColor = generateColor();
-                }
-                table.rows[i].cells[j].style.backgroundColor = tempColor;
-
-                currColors[j - 1] = tempColor;
-
-            }
-
-            console.log("Prev" + JSON.stringify(prevColors));
-            console.log("Curr" + JSON.stringify(currColors));
+            if(firstColor === "red"){secondColor = generateColor("red","blue")}
+            else if(firstColor === "blue"){secondColor = generateColor("red")}
+            else{secondColor = generateColor()}
+            colorCombo = [firstColor,secondColor];
+        }
+        while(!checkIfUnique(colorCombo, combos)){
+            combos.push(colorCombo)
         }
 
-        rerun=true;
+    }
+    return combos;
+
+}
+
+function recolorCell(){
+    let testCombos = generateColors()
+    const table = document.querySelector("table");
+    let k = 0;
+    while (k < 7) {
+        for (let i = 1; i < table.rows.length; i++) {
+            //for (let j = 1; j < table.rows[i].cells.length; j++) {
+            table.rows[i].cells[1].style.backgroundColor = testCombos[k][0];
+            table.rows[i].cells[2].style.backgroundColor = testCombos[k][1];
+            k++;
+        }
+
     }
 }
 
 
-//console.log(generateColor())
+console.log(recolorCell());
